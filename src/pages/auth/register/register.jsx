@@ -3,46 +3,51 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, FormFeedback, Input } from 'reactstrap';
 import axios from 'axios';
-
-import './style.scss'
+import Navbar3 from '../../../component/navbar3/navbar3';
+import Footer from '../../../component/footer/footer';
+import './register.scss'
 
 const validationSchema = yup.object().shape({
+    fullName: yup.string().min(5).required("Required field"),
     email: yup.string().email().required("Required field"),
     password: yup.string().min(8).required("Required field")
 })
 
-export default function Login() {
+export default function Register() {
 
-    const handleLogin = async () => {
+    const handleRegister = async () => {
         const data = formik.values
-        await axios('http://localhost:8080/login', data)
+        await axios('http://localhost:8080/register', data)
         .then(res => {
             localStorage.setItem('access_token', res.data.accessToken)
         })        
         .catch(err => {
         // Fake Auth
             localStorage.setItem('access_token', "abcdefghi")
-            window.location = "/home"
+            window.location = "/register"
             console.error(err)
         })
     }
 
     const formik = useFormik({
         initialValues: {
+            'Full Name' : '',
             'Email': '',
             'Password': ''
         },
         validationSchema: validationSchema,
-        onSubmit: () => handleLogin()
+        onSubmit: () => handleRegister()
     })
 
     console.log(formik.set)
 
     return (
-        <div className="login-page">
+<div>
+<Navbar3 />
+        <div className="register-page">
             <form className="form-container" onSubmit={formik.handleSubmit}>
-                <h1 className="title">MealMe</h1>
-                <p className="desc">Log in With Your Email Address and Password</p>
+                <h1 className="title">Create Your Free Account</h1>
+                <p className="desc">Register Now to Get More Recipes!</p>
                 {
                     Object.keys(formik.initialValues).map((key, idx) => (
                         <div key={idx} className="row-input">
@@ -62,12 +67,14 @@ export default function Login() {
                         </div>
                     ))
                 }
-                <br/>
-                <input type="checkbox" name="checkbox" value="remember"/> 
-        <label for="checkbox"> Remember Me</label>
-                <Button className="btn-submit" type="submit">Login</Button>
-                <p className="signup">Do not have an account? <a href="/register">Register</a></p>
+                <br/>                
+                <Button className="btn-submit" type="submit">Register</Button>                
+                <p className="signup">Already have an account? <a href="/login">Login</a></p>
             </form>
+        </div>
+
+<Footer />
+
         </div>
     )
 }

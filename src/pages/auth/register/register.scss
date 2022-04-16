@@ -1,32 +1,32 @@
 .register-page {    
-    $main-color: #4b4988;
-    $second-color: #35326d;
-    $third-color: #934085;
+    $main-color: #f54b08;
+    $second-color: #e47c1b;
+    $third-color: #f89706;
 
     color: $main-color;
     text-align: center;
 
-    background-image: url("../assests/background1.jpg");
-    /* Full height */
-    height: 100vh;
+    background-image: url("../../../assests/background1.jpg");  
+    height: 85vh;
 
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     padding: 0 20px;
-    overflow: hidden;
+    overflow: hidden;  
 
     .form-container {
-        margin: 90px auto;
+        margin: 40px auto;
         padding: 50px 20px;
-        max-width: 350px;   
-        height: 500px;           
-        background-color: #fce1fc;
+        max-width: 400px;   
+        height: 520px;           
+        background-color: #f7facc;
         border-radius: 20px;
+        box-shadow: 5px 10px;
 
         .title {
-            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-size: clamp(1.5rem, 2vw, 1.5rem);
             font-family: Arial;
         }
 
