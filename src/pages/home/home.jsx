@@ -1,22 +1,25 @@
 import React from "react";
 import * as ReactDOM from "react-dom";
-import Navbar from "../../component/navbar/navbar";
 import Footer from "../../component/footer/footer";
-import "./home.scss"
 import Card from "../../component/card/card";
-
-
+import Slider from "../../component/slider/slider";
+import SearchBox from "../../component/search-box/search-box";
+import "./home.scss"
 
 export default function Home () {
       return (
-          <>
-             <Navbar/>
-            <div className="home-wrapper">
+          <>     
 
-            <Card img="../../assests/carrot_juice.jpg"
+             <Slider />
+
+             <SearchBox/>
+             
+            <div className="home-wrapper">
+       
+            <Card img src={require("../../assests/carrot_juice.jpg")}
         title="Gerson Therapy Carrot Juice" 
         description="Organic, fresh-pressed carrot juice is one of the main recipes 
-        used in the cancer-fighting Gerson Therapy diet." />
+        used in the cancer-fighting Gerson Therapy diet."/>
 
         <Card img="../../assests/carrot_juice.jpg"  
         title="Sweet Pea Microgreen Smoothie" 
@@ -56,10 +59,10 @@ export default function Home () {
 
             </div>
 
-            <Footer />
-            </>  
+                 </>  
         )
      }
 
      
   
+

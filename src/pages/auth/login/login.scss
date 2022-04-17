@@ -6,33 +6,33 @@
     color: $main-color;
     text-align: center;
 
-    background-image: url("../../../assests/background1.jpg");    
-    height: 85vh;
-    
+    background-image: url("../../../assests/background1.jpg");      
+    margin-top: 0;
 
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     padding: 0 20px;
     overflow: hidden;
 
     .form-container {
-        margin: 40px auto;
+        margin: 180px auto;
         padding: 50px 20px;
-        max-width: 350px;   
-        height: 520px;           
+        max-width: 400px;   
+        height: 550px;           
         background-color: #f7facc;
         border-radius: 20px;
-        box-shadow: 5px 10px;
+        box-shadow: 5px 10px;       
 
-        .title {           
+        .form-title {           
             font-size: clamp(4rem, 2vw, 2rem);
             font-family: Brush Script MT;
         }
 
         .desc {
-            font-size: clamp(0.5rem, 1vw + 0.6rem, 0.8rem);
+            font-size: clamp(1rem, 1vw + 0.6rem, 0.8rem);
             font-family: Arial;
         }
 
@@ -69,7 +69,7 @@
             }
             
         .signup {
-            font-size: 12px;
+            font-size: 15px;
             a {
             color: $main-color;
               }
@@ -78,15 +78,6 @@
           }
 }
 
-
-
-
-
-
-
-
-
-
- 
-       
-  
+.checkbox{
+  padding-left: 5px; 
+}

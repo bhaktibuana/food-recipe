@@ -3,11 +3,9 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, FormFeedback, Input } from 'reactstrap';
 import axios from 'axios';
-import Navbar2 from '../../../component/navbar2/navbar2';
-import Footer from '../../../component/footer/footer';
-
-
 import './login.scss'
+
+
 
 const validationSchema = yup.object().shape({
     email: yup.string().email().required("Required field"),
@@ -21,11 +19,12 @@ export default function Login() {
         await axios('http://localhost:8080/login', data)
         .then(res => {
             localStorage.setItem('access_token', res.data.accessToken)
+            window.location = "/"
         })        
         .catch(err => {
         // Fake Auth
-            localStorage.setItem('access_token', "abcdefghi")
-            window.location = "/home"
+            // localStorage.setItem('access_token', "abcdefghi")
+            // window.location = "/"
             console.error(err)
         })
     }
@@ -43,11 +42,11 @@ export default function Login() {
 
     return (
 <div>
-<Navbar2/>
 
         <div className="login-page">
+           
             <form className="form-container" onSubmit={formik.handleSubmit}>
-                <h1 className="title">MealMe</h1>
+                <h1 className="form-title">MealMe</h1>
                 <p className="desc">Log in With Your Email Address and Password</p>
                 {
                     Object.keys(formik.initialValues).map((key, idx) => (
@@ -70,14 +69,13 @@ export default function Login() {
                 }
                 <br/>
 
-                <input type="checkbox" name="checkbox" value="remember"/>
-        <label for="checkbox"> Remember Me</label>
+                <input type="checkbox" name="checkbox" value="remember" />
+        <label for="checkbox" className='checkbox'> Remember Me</label>
                 <Button className="btn-submit" type="submit"><b>Login</b></Button>
                 <p className="signup">Do not have an account? <a href="/register">Register</a></p>
             </form>
         </div>
-
-<Footer />
+       
         </div>
     )
 }
