@@ -3,8 +3,6 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, FormFeedback, Input } from 'reactstrap';
 import axios from 'axios';
-import Navbar3 from '../../../component/navbar3/navbar3';
-import Footer from '../../../component/footer/footer';
 import './register.scss'
 
 const validationSchema = yup.object().shape({
@@ -20,6 +18,7 @@ export default function Register() {
         await axios('http://localhost:8080/register', data)
         .then(res => {
             localStorage.setItem('access_token', res.data.accessToken)
+            window.location = "/login"
         })        
         .catch(err => {
         // Fake Auth
@@ -43,11 +42,11 @@ export default function Register() {
 
     return (
 <div>
-<Navbar3 />
+
         <div className="register-page">
             <form className="form-container" onSubmit={formik.handleSubmit}>
-                <h1 className="title">Create Your Free Account</h1>
-                <p className="desc">Register Now to Get More Recipes!</p>
+                <h1 className="form-title">Create Your Free Account</h1>
+                <p className="desc">Register Now to Share Your Amazing Recipe too!</p>
                 {
                     Object.keys(formik.initialValues).map((key, idx) => (
                         <div key={idx} className="row-input">
@@ -73,7 +72,7 @@ export default function Register() {
             </form>
         </div>
 
-<Footer />
+
 
         </div>
     )
