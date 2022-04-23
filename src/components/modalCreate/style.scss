@@ -1,0 +1,34 @@
+form.create-recipe {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & > .item {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+    & > label {
+      width: 25%;
+      min-width: 75px;
+      height: auto;
+      display: flex;
+      margin-right: auto;
+    }
+
+    & > .input-container {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+    }
+  }
+}
