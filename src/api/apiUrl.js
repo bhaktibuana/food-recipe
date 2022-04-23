@@ -1,5 +1,5 @@
 // const apiBaseUrl = "http://localhost:3001";
-const apiBaseUrl = "http://foodrecipe-server.herokuapp.com";
+const apiBaseUrl = "https://foodrecipe-server.herokuapp.com/";
 
 export const apiUrl = {
   getAllRecipes: `${apiBaseUrl}/recipe`,
