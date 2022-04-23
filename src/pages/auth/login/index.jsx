@@ -82,7 +82,7 @@ const Login = (props) => {
     <>
       <div className="login-container">
         <NavigationStateContext.Provider
-          value={[showSideNavbar, setShowSideNavbar]}
+          value={[showSideNavbar, setShowSideNavbar, props.apiUrl]}
         >
           <SideNavbar />
           <TopNavbar />

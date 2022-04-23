@@ -11,10 +11,13 @@ import {
 } from "react-icons/md";
 
 import "./style.scss";
+import ModalCreate from "../../modalCreate";
 
 const safeDocument = typeof document !== "undefined" ? document : {};
 
 const SideNavbar = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const sideNavbarState = useContext(NavigationStateContext);
   const navigate = useNavigate();
 
@@ -83,6 +86,7 @@ const SideNavbar = () => {
                   className="item"
                   onClick={(e) => {
                     e.preventDefault();
+                    setModalVisible(true);
                   }}
                 >
                   <MdNoteAdd size={24} />
@@ -128,6 +132,12 @@ const SideNavbar = () => {
           </div>
         </div>
       </div>
+
+      <ModalCreate
+        visible={modalVisible}
+        setVisible={setModalVisible}
+        apiUrl={sideNavbarState[2]}
+      />
     </>
   );
 };
