@@ -328,7 +328,7 @@ const ModalCreate = (props) => {
                 onChange={(info) =>
                   setRecipeData({ ...recipeData, image_url: info.cdnUrl })
                 }
-                // clearable
+                clearable
               />
             </div>
           </div>
