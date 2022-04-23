@@ -1,41 +1,49 @@
 import React from "react";
-import {Routes,Route, BrowserRouter} from 'react-router-dom';
-import Register from './pages/auth/register/register';
-import Login from './pages/auth/login/login';
-import Home from "./pages/home/home";
-import Navbar from "./component/navbar/navbar";
-import Footer from "./component/footer/footer";
-import Recipe1 from "./pages/recipe/recipe1";
-import Recipe2 from "./pages/recipe/recipe2";
-import Recipe3 from "./pages/recipe/recipe3";
-import Recipe4 from "./pages/recipe/recipe4";
-import Recipe5 from "./pages/recipe/recipe5";
-import Recipe6 from "./pages/recipe/recipe6";
-import Recipe7 from "./pages/recipe/recipe7";
-import Recipe8 from "./pages/recipe/recipe8";
-import "./App.css";
+import {
+  Routes,
+  Route,
+  BrowserRouter,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+import HomePage from "./pages/home";
+import Login from "./pages/auth/login";
+import Register from "./pages/auth/register";
+import RecipeDetail from "./pages/detail";
+import { apiUrl } from "./api/apiUrl";
 
+import "./App.scss";
+
+export const NavigationStateContext = React.createContext();
+
+const RequireNoAuth = () => {
+  const isAuth = localStorage.getItem("access_token");
+
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
+
+  return <Outlet />;
+};
 
 const App = () => {
   return (
     <>
+      <BrowserRouter>
+        <Routes>
+          {/* public route */}
+          <Route path="/" element={<HomePage apiUrl={apiUrl} />} />
+          <Route path="/recipe/:category-:id-:name" element={<RecipeDetail apiUrl={apiUrl} />} />
 
-    <Navbar/>
-
-    <BrowserRouter>
-      <Routes>
-  
-      <Route path="/" element={<Home/>} />
-      <Route path="/login" element={<Login/>} />
-      <Route path="/register" element={<Register/>} />     
-
-      </Routes>
+          {/* auth route */}
+          <Route element={<RequireNoAuth />}>
+            <Route path="/login" element={<Login apiUrl={apiUrl} />} />
+            <Route path="/register" element={<Register apiUrl={apiUrl} />} />
+          </Route>
+        </Routes>
       </BrowserRouter>
-      
-      <Footer/>
-
-      </>
-  )
-}
+    </>
+  );
+};
 
 export default App;
