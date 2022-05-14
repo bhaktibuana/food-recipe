@@ -10,6 +10,7 @@ import {
   InputNumber,
   Button,
 } from "antd";
+import { MdOutlineCancel } from "react-icons/md";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -60,36 +61,45 @@ const ModalCreate = (props) => {
   };
 
   const handleAddIngredient = () => {
-    const id = ingredientInput.length + 1;
-    setIngredientInput([
-      ...ingredientInput,
-      <Input
-        key={id}
-        style={{ margin: "0 0 10px 0" }}
-        placeholder={`Ingredient ${id}`}
-        onChange={(e) =>
-          (recipeData.ingredients[id - 1] = { name: e.target.value })
-        }
-      />,
-    ]);
+    setIngredientInput([...ingredientInput, ""]);
+  };
+
+  const handleChangeIngredient = (e, index) => {
+    ingredientInput[index] = e.target.value;
+    setIngredientInput([...ingredientInput]);
+    recipeData.ingredients[index] = { name: e.target.value };
+    setRecipeData({ ...recipeData });
+  };
+
+  const handleRemoveIngredient = (index) => {
+    ingredientInput.splice(index, 1);
+    setIngredientInput([...ingredientInput]);
+    recipeData.ingredients.splice(index, 1);
+    setRecipeData({ ...recipeData });
   };
 
   const handleAddStep = () => {
-    const id = stepInput.length + 1;
-    setStepInput([
-      ...stepInput,
-      <Input
-        key={id}
-        style={{ margin: "0 0 10px 0" }}
-        placeholder={`Step ${id}`}
-        onChange={(e) =>
-          (recipeData.steps[id - 1] = {
-            order_number: id,
-            description: e.target.value,
-          })
-        }
-      />,
-    ]);
+    setStepInput([...stepInput, ""]);
+  };
+
+  const handleChangeStep = (e, index) => {
+    stepInput[index] = e.target.value;
+    setStepInput([...stepInput]);
+    recipeData.steps[index] = {
+      order_number: index + 1,
+      description: e.target.value,
+    };
+    setRecipeData({ ...recipeData });
+  };
+
+  const handleRemoveStep = (index) => {
+    stepInput.splice(index, 1);
+    setStepInput([...stepInput]);
+    recipeData.steps.splice(index, 1);
+    for (let i = 0; i < recipeData.steps.length; i++) {
+      recipeData.steps[i].order_number = i + 1;
+    }
+    setRecipeData({ ...recipeData });
   };
 
   const fetchCategories = async () => {
@@ -160,6 +170,10 @@ const ModalCreate = (props) => {
   useEffect(() => {
     fetchCategories();
   }, [props.visible]);
+
+  useEffect(() => {
+    console.log(recipeData);
+  }, [recipeData]);
 
   return (
     <>
@@ -287,7 +301,27 @@ const ModalCreate = (props) => {
             <label htmlFor="ingredients">Ingredients</label>
 
             <div className="input-container">
-              {ingredientInput}
+              {ingredientInput.map((ingredient, index) => (
+                <div key={index} className="input-group-container">
+                  <Input
+                    className="input-list"
+                    placeholder={`Ingredient ${index + 1}`}
+                    onChange={(e) => handleChangeIngredient(e, index)}
+                    value={ingredient}
+                  />
+
+                  <Button
+                    className="btn-cancel"
+                    type="link"
+                    danger
+                    onClick={() => {
+                      handleRemoveIngredient(index);
+                    }}
+                  >
+                    <MdOutlineCancel size={20} />
+                  </Button>
+                </div>
+              ))}
 
               <Button
                 type="dashed"
@@ -304,7 +338,27 @@ const ModalCreate = (props) => {
             <label htmlFor="steps">Steps</label>
 
             <div className="input-container">
-              {stepInput}
+              {stepInput.map((step, index) => (
+                <div key={index} className="input-group-container">
+                  <Input
+                    className="input-list"
+                    placeholder={`Step ${index + 1}`}
+                    onChange={(e) => handleChangeStep(e, index)}
+                    value={step}
+                  />
+
+                  <Button
+                    className="btn-cancel"
+                    type="link"
+                    danger
+                    onClick={() => {
+                      handleRemoveStep(index);
+                    }}
+                  >
+                    <MdOutlineCancel size={20} />
+                  </Button>
+                </div>
+              ))}
 
               <Button
                 type="dashed"
