@@ -17,6 +17,8 @@ const HomePage = (props) => {
   const [totalPages, setTotalPages] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
+  window.scrollTo(0, 0);
+
   const fetchRecipes = async (page) => {
     setIsLoading(true);
 
@@ -65,7 +67,7 @@ const HomePage = (props) => {
   };
 
   useEffect(() => {
-    fetchRecipes(0);
+    fetchRecipes((props.currentPage - 1) * pageSize);
   }, []);
 
   return (
@@ -84,7 +86,7 @@ const HomePage = (props) => {
               <CustomCarousel />
             </div>
 
-            <div className="content-body">
+            <div id="content-recipe" className="content-body">
               {isLoading ? (
                 <div className="spinner-container">
                   <Spin tip="Loading product..." size="large" />
@@ -97,10 +99,23 @@ const HomePage = (props) => {
                 <Pagination
                   showSizeChanger={true}
                   defaultCurrent={1}
+                  current={props.currentPage}
                   defaultPageSize={pageSize}
                   total={totalPages}
                   onChange={(page) => {
                     fetchRecipes((page - 1) * pageSize);
+                    props.setCurrentPage(page);
+
+                    const element = document.getElementById("content-recipe");
+                    const headerOffset = 80;
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition =
+                      elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: "smooth",
+                    });
                   }}
                   onShowSizeChange={(current, size) => {
                     setPageSize(size);
