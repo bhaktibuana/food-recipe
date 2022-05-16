@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Routes,
   Route,
@@ -27,13 +27,28 @@ const RequireNoAuth = () => {
 };
 
 const App = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+
   return (
     <>
       <BrowserRouter>
         <Routes>
           {/* public route */}
-          <Route path="/" element={<HomePage apiUrl={apiUrl} />} />
-          <Route path="/recipe/:category-:id-:name" element={<RecipeDetail apiUrl={apiUrl} />} />
+          <Route
+            path="/"
+            element={
+              <HomePage
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                apiUrl={apiUrl}
+              />
+            }
+          />
+          
+          <Route
+            path="/recipe/:category-:id-:name"
+            element={<RecipeDetail apiUrl={apiUrl} />}
+          />
 
           {/* auth route */}
           <Route element={<RequireNoAuth />}>

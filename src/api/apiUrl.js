@@ -8,4 +8,6 @@ export const apiUrl = {
   getRecipeById: `${apiBaseUrl}/recipe/`,
   login: `${apiBaseUrl}/login`,
   register: `${apiBaseUrl}/register`,
+  getRatingByUser: `${apiBaseUrl}/rating/user/`,
+  createUpdateRating: `${apiBaseUrl}/rating/`,
 };

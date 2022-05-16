@@ -171,10 +171,6 @@ const ModalCreate = (props) => {
     fetchCategories();
   }, [props.visible]);
 
-  useEffect(() => {
-    console.log(recipeData);
-  }, [recipeData]);
-
   return (
     <>
       <Modal
