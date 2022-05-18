@@ -5,19 +5,22 @@ import SideNavbar from "../../components/navigation/sideNav";
 import TopNavbar from "../../components/navigation/topNav";
 import ThumbnailCard from "./thumbnailCard";
 import CustomCarousel from "./customCarousel";
-import { Pagination, Spin } from "antd";
+import { Pagination } from "antd";
 import axios from "axios";
 
 import "./style.scss";
+import CardSkeleton from "./cardSkeleton";
 
 const HomePage = (props) => {
   const [showSideNavbar, setShowSideNavbar] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [recipesData, setRecipesData] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [pageSize, setPageSize] = useState(10);
 
-  window.scrollTo(0, 0);
+  const generateRandomArr = (length) => {
+    return [...new Array(length)].map(() => Math.round(Math.random()));
+  };
 
   const fetchRecipes = async (page) => {
     setIsLoading(true);
@@ -68,6 +71,11 @@ const HomePage = (props) => {
 
   useEffect(() => {
     fetchRecipes((props.currentPage - 1) * pageSize);
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    document.title = "Meal Me";
   }, []);
 
   return (
@@ -76,8 +84,8 @@ const HomePage = (props) => {
         <NavigationStateContext.Provider
           value={[showSideNavbar, setShowSideNavbar, props.apiUrl]}
         >
-          <SideNavbar />
-          <TopNavbar />
+          <SideNavbar setCurrentPage={props.setCurrentPage} />
+          <TopNavbar setCurrentPage={props.setCurrentPage} />
         </NavigationStateContext.Provider>
 
         <div className="page-container">
@@ -88,8 +96,10 @@ const HomePage = (props) => {
 
             <div id="content-recipe" className="content-body">
               {isLoading ? (
-                <div className="spinner-container">
-                  <Spin tip="Loading product..." size="large" />
+                <div className="card-list">
+                  {generateRandomArr(pageSize).map((values, index) => (
+                    <CardSkeleton key={index} />
+                  ))}
                 </div>
               ) : (
                 <div className="card-list">{recipesData}</div>

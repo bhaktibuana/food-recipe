@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationStateContext } from "../../../App";
 import Footer from "../../../components/footer";
 import SideNavbar from "../../../components/navigation/sideNav";
@@ -52,6 +52,12 @@ const Register = (props) => {
     },
   });
 
+  const handleNavigateTimeout = () => {
+    setTimeout(() => {
+      navigate("/login");
+    }, 1500);
+  };
+
   const handleRegister = async () => {
     setConfirmLoading(true);
 
@@ -77,6 +83,7 @@ const Register = (props) => {
           );
           setAlertType("success");
           setShowAlert(true);
+          handleNavigateTimeout();
         })
         .catch((err) => {
           setInputNameActive(false);
@@ -99,14 +106,18 @@ const Register = (props) => {
     }
   };
 
+  useEffect(() => {
+    document.title = "Meal Me - Register";
+  }, []);
+
   return (
     <>
       <div className="register-container">
         <NavigationStateContext.Provider
           value={[showSideNavbar, setShowSideNavbar, props.apiUrl]}
         >
-          <SideNavbar />
-          <TopNavbar />
+          <SideNavbar setCurrentPage={props.setCurrentPage} />
+          <TopNavbar setCurrentPage={props.setCurrentPage} />
         </NavigationStateContext.Provider>
 
         <div className="page-container">

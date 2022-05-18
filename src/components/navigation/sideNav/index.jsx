@@ -15,7 +15,7 @@ import ModalCreate from "../../modalCreate";
 
 const safeDocument = typeof document !== "undefined" ? document : {};
 
-const SideNavbar = () => {
+const SideNavbar = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const sideNavbarState = useContext(NavigationStateContext);
@@ -27,6 +27,7 @@ const SideNavbar = () => {
 
   const handleNavigate = (event, path) => {
     event.preventDefault();
+    props.setCurrentPage(1);
     navigate(path);
   };
 
