@@ -20,9 +20,7 @@ const RecipeDetail = (props) => {
   const [userRating, setUserRating] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { id } = useParams();
-
-  window.scrollTo(0, 0);
+  const { id, name } = useParams();
 
   const timeFormater = (value) => {
     const minutes = Math.floor(value / 60);
@@ -147,11 +145,16 @@ const RecipeDetail = (props) => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchRecipe(true);
 
     if (localStorage.getItem("access_token")) {
       fetchRatingByUser();
     }
+  }, []);
+
+  useEffect(() => {
+    document.title = name;
   }, []);
 
   return (
@@ -160,8 +163,8 @@ const RecipeDetail = (props) => {
         <NavigationStateContext.Provider
           value={[showSideNavbar, setShowSideNavbar, props.apiUrl]}
         >
-          <SideNavbar />
-          <TopNavbar />
+          <SideNavbar setCurrentPage={props.setCurrentPage} />
+          <TopNavbar setCurrentPage={props.setCurrentPage} />
         </NavigationStateContext.Provider>
 
         <div className="page-container">

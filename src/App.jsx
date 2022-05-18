@@ -44,16 +44,29 @@ const App = () => {
               />
             }
           />
-          
+
           <Route
             path="/recipe/:category-:id-:name"
-            element={<RecipeDetail apiUrl={apiUrl} />}
+            element={
+              <RecipeDetail apiUrl={apiUrl} setCurrentPage={setCurrentPage} />
+            }
           />
 
           {/* auth route */}
           <Route element={<RequireNoAuth />}>
-            <Route path="/login" element={<Login apiUrl={apiUrl} />} />
-            <Route path="/register" element={<Register apiUrl={apiUrl} />} />
+            <Route
+              path="/login"
+              element={
+                <Login apiUrl={apiUrl} setCurrentPage={setCurrentPage} />
+              }
+            />
+            
+            <Route
+              path="/register"
+              element={
+                <Register apiUrl={apiUrl} setCurrentPage={setCurrentPage} />
+              }
+            />
           </Route>
         </Routes>
       </BrowserRouter>

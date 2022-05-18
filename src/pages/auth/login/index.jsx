@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationStateContext } from "../../../App";
 import Footer from "../../../components/footer";
 import SideNavbar from "../../../components/navigation/sideNav";
@@ -78,14 +78,18 @@ const Login = (props) => {
     }
   };
 
+  useEffect(() => {
+    document.title = "Meal Me - Login";
+  }, []);
+
   return (
     <>
       <div className="login-container">
         <NavigationStateContext.Provider
           value={[showSideNavbar, setShowSideNavbar, props.apiUrl]}
         >
-          <SideNavbar />
-          <TopNavbar />
+          <SideNavbar setCurrentPage={props.setCurrentPage} />
+          <TopNavbar setCurrentPage={props.setCurrentPage} />
         </NavigationStateContext.Provider>
 
         <div className="page-container">

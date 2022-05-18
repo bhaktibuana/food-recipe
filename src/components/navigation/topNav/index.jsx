@@ -6,7 +6,7 @@ import { MdMenu } from "react-icons/md";
 import "./style.scss";
 import ModalCreate from "../../modalCreate";
 
-const TopNavbar = () => {
+const TopNavbar = (props) => {
   const [isScroll, setIsScroll] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -15,6 +15,7 @@ const TopNavbar = () => {
 
   const handleNavigate = (event, path) => {
     event.preventDefault();
+    props.setCurrentPage(1);
     navigate(path);
   };
 
