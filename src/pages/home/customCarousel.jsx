@@ -9,7 +9,7 @@ const CustomCarousel = () => {
       <Carousel autoplay>
         <div className="carousel-content">
           <img
-            src={require("../../images/carrot_juice.jpg")}
+            src={require("../../images/carrot_juice.webp")}
             alt=""
             className="carousel-img"
           />
@@ -17,7 +17,7 @@ const CustomCarousel = () => {
 
         <div className="carousel-content">
           <img
-            src={require("../../images/microgreen_smoothie.jpg")}
+            src={require("../../images/microgreen_smoothie.webp")}
             alt=""
             className="carousel-img"
           />
@@ -25,7 +25,7 @@ const CustomCarousel = () => {
 
         <div className="carousel-content">
           <img
-            src={require("../../images/avocado_toast.jpg")}
+            src={require("../../images/avocado_toast.webp")}
             alt=""
             className="carousel-img"
           />

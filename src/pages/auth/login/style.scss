@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
 .login-container {
   $primary-color: #f7facc;
   $secondary-color: #f16c13;
@@ -26,7 +28,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-image: url("../../../images/login-bg.jpg");
+      background-image: url("../../../images/login-bg.webp");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -71,7 +73,7 @@
               color: $light-color;
               font-size: 3rem;
               font-weight: bold;
-              font-family: "Script MT";
+              font-family: 'Kaushan Script', cursive;
             }
 
             & > p.card-header-text {
