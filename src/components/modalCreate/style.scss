@@ -52,3 +52,11 @@ form.create-recipe {
     }
   }
 }
+
+.input-cooking-time {
+  width: 100%;
+
+  @media screen and (min-width: 768px) {
+    width: calc(100% / 3);
+  }
+}
