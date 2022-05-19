@@ -276,9 +276,9 @@ const ModalCreate = (props) => {
             <label htmlFor="cooking_time">Cooking Time</label>
 
             <div className="input-container">
-              <Input.Group>
+              <Input.Group compact>
                 <InputNumber
-                  style={{ width: "33.33%" }}
+                  className="input-cooking-time"
                   defaultValue={0}
                   min={0}
                   addonAfter="hr"
@@ -295,7 +295,7 @@ const ModalCreate = (props) => {
                 />
 
                 <InputNumber
-                  style={{ width: "33.33%" }}
+                  className="input-cooking-time"
                   defaultValue={0}
                   min={0}
                   addonAfter="min"
@@ -312,7 +312,7 @@ const ModalCreate = (props) => {
                 />
 
                 <InputNumber
-                  style={{ width: "33.33%" }}
+                  className="input-cooking-time"
                   defaultValue={0}
                   min={0}
                   addonAfter="sec"
