@@ -13,10 +13,11 @@ const ThumbnailCard = (props) => {
   };
 
   const timeFormater = (value) => {
-    const minutes = Math.floor(value / 60);
-    const seconds = value - minutes * 60;
+    const hour = Math.floor(value / 3600);
+    const minutes = Math.floor((value - hour * 3600) / 60);
+    const seconds = value - hour * 3600 - minutes * 60;
 
-    return `${minutes}m ${seconds}s`;
+    return `${hour}h ${minutes}m ${seconds}s`;
   };
 
   return (
