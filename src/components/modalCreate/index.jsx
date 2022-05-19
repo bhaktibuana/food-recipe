@@ -28,7 +28,11 @@ const ModalCreate = (props) => {
     category: null,
     name: null,
     description: null,
-    cooking_time: 1,
+    cooking_time: {
+      hours: 0,
+      minutes: 0,
+      seconds: 1,
+    },
     calories: 1,
     ingredients: [],
     steps: [],
@@ -47,7 +51,11 @@ const ModalCreate = (props) => {
       category: null,
       name: null,
       description: null,
-      cooking_time: 1,
+      cooking_time: {
+        hours: 0,
+        minutes: 0,
+        seconds: 1,
+      },
       calories: 1,
       ingredients: [],
       steps: [],
@@ -126,6 +134,10 @@ const ModalCreate = (props) => {
     setIsLoading(true);
 
     const token = localStorage.getItem("access_token");
+    const hours = recipeData.cooking_time.hours;
+    const minutes = recipeData.cooking_time.minutes;
+    const seconds = recipeData.cooking_time.seconds;
+
     const config = {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -134,6 +146,7 @@ const ModalCreate = (props) => {
 
     const bodyParams = {
       ...recipeData,
+      cooking_time: hours * 3600 + minutes * 60 + seconds,
       ingredients: JSON.stringify(recipeData.ingredients),
       steps: JSON.stringify(recipeData.steps),
     };
@@ -263,16 +276,58 @@ const ModalCreate = (props) => {
             <label htmlFor="cooking_time">Cooking Time</label>
 
             <div className="input-container">
-              <InputNumber
-                style={{ width: "100%" }}
-                defaultValue={1}
-                min={1}
-                addonAfter="sec"
-                onChange={(value) =>
-                  setRecipeData({ ...recipeData, cooking_time: value })
-                }
-                value={recipeData.cooking_time}
-              />
+              <Input.Group>
+                <InputNumber
+                  style={{ width: "33.33%" }}
+                  defaultValue={0}
+                  min={0}
+                  addonAfter="hr"
+                  value={recipeData.cooking_time.hours}
+                  onChange={(value) =>
+                    setRecipeData({
+                      ...recipeData,
+                      cooking_time: {
+                        ...recipeData.cooking_time,
+                        hours: value,
+                      },
+                    })
+                  }
+                />
+
+                <InputNumber
+                  style={{ width: "33.33%" }}
+                  defaultValue={0}
+                  min={0}
+                  addonAfter="min"
+                  value={recipeData.cooking_time.minutes}
+                  onChange={(value) =>
+                    setRecipeData({
+                      ...recipeData,
+                      cooking_time: {
+                        ...recipeData.cooking_time,
+                        minutes: value,
+                      },
+                    })
+                  }
+                />
+
+                <InputNumber
+                  style={{ width: "33.33%" }}
+                  defaultValue={0}
+                  min={0}
+                  addonAfter="sec"
+                  value={recipeData.cooking_time.seconds}
+                  onChange={(value) =>
+                    setRecipeData({
+                      ...recipeData,
+                      cooking_time: {
+                        ...recipeData.cooking_time,
+                        seconds: value,
+                      },
+                    })
+                  }
+                />
+              </Input.Group>
             </div>
           </div>
 
